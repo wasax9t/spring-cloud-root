@@ -1,0 +1,15 @@
+mvn clean package -Dmaven.test.skip=true
+
+java -jar eureka-register/target/eureka-register-0.0.1-SNAPSHOT.jar --spring.profiles.active=peer1
+java -jar eureka-register/target/eureka-register-0.0.1-SNAPSHOT.jar --spring.profiles.active=peer2
+java -jar eureka-register/target/eureka-register-0.0.1-SNAPSHOT.jar --spring.profiles.active=peer3
+# for checkout
+# http://localhost:8000
+
+java -jar eureka-producer/target/eureka-producer-0.0.1-SNAPSHOT.jar
+# http://localhost:9000/hello?name=neo
+# should reply "hello neo，this is first message"
+
+java -jar eureka-consumer/target/eureka-consumer-0.0.1-SNAPSHOT.jar
+# http://localhost:9001/hello/neo
+# hello neo，this is first message
